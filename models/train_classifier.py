@@ -25,16 +25,33 @@ from sklearn.svm import SVC
 from sqlalchemy import create_engine
 
 def load_data(database_filepath):
+    '''load data
+    INPUT:
+    database_filepath - database with  id, message, original, genre,
+                        and 36 categories(related, request...etc) columns.
+
+    OUTPUT:
+    X - pd.DataFrame of messages
+    Y - pd.DataFrame of genre and 36 categories(related, request...etc)
+
+    Description:
+    load database which created by process_data.py
+    '''
     engine = create_engine('sqlite:///data/DisasterResponse.db')
     df = pd.read_sql_table('data_disaster', 'sqlite:///data/DisasterResponse.db')
     X = df.message
     Y = df.iloc[:,4:]
     return X, Y
 
-  #    return X, Y, category_names
-
 
 def tokenize(text):
+    '''tokenizer
+    INPUT:
+    text - text to be tokenized
+
+    OUTPUT:
+    text - tokenized text
+    '''
     lemmatizer = WordNetLemmatizer()
     clean_tokens = []
 
@@ -45,11 +62,23 @@ def tokenize(text):
         tokens_join = ' '.join(tokens_rem)  # join list to string
         clean_tokens.append(tokens_join)
     messages = np.array(clean_tokens)
+
     return text
 
 
 
 def build_model(X_train, Y_train):
+    '''build model
+    INPUT:
+    X_train, Y_train - train datasets
+
+    OUTPUT:
+    model - trained model
+
+    Description:
+    perform grid search 
+    '''
+
     model = Pipeline([
     ('vect', CountVectorizer(tokenizer=tokenize)) ,
     ('tfidf', TfidfTransformer()),
@@ -64,7 +93,6 @@ def build_model(X_train, Y_train):
     return model
 
 def evaluate_model(model, X_test, Y_test):
-#def evaluate_model(model, X_test, Y_test, category_names):
 
 #nomal
     y_pred = model.predict(X_test)
@@ -78,6 +106,14 @@ def evaluate_model(model, X_test, Y_test):
 
 
 def save_model(model, model_filepath):
+    '''save model
+    INPUT:
+    model - model to be pickled
+    model_filepath -path to save the model
+
+    Description:
+    save the model as a pickle at the specified path.
+    '''
     with open(model_filepath, 'wb') as f:
         pickle.dump(model, f)
 
@@ -97,8 +133,6 @@ def main():
 
         print('Evaluating model...')
         evaluate_model(model, X_test, Y_test)
-
-#        evaluate_model(model, X_test, Y_test, category_names)
 
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
         save_model(model, model_filepath)
