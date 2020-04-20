@@ -5,6 +5,8 @@
 - project includes:
     - a web app where an emergency worker can input a new message and get classification results in several categories.
     - figures which display visualizations of the data.
+    
+![screenshot of web app](https://github.com/yumx02/DisasterResponsePipeline/blob/master/Screen%20Shot%202020-04-20%20at%2021.54.35.png)
 
 ### Project Components
 1. ETL Pipeline
