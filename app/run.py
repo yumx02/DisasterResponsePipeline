@@ -3,6 +3,9 @@ import plotly
 import pandas as pd
 import pickle
 
+import nltk
+nltk.download('wordnet')
+
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
@@ -28,7 +31,7 @@ def tokenize(text):
 
 # load data
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
-df = pd.read_sql_table('disaster_data', engine)
+df = pd.read_sql_table('data_disaster', engine)
 
 
 # load model
