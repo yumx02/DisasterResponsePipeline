@@ -2,10 +2,9 @@ import json
 import plotly
 import pandas as pd
 import pickle
-
 import nltk
-nltk.download('wordnet')
 
+from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
@@ -29,6 +28,7 @@ def tokenize(text):
 
     return clean_tokens
 
+
 # load data
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('data_disaster', engine)
@@ -51,6 +51,11 @@ def index():
 
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
+    df_sum = df.sum()
+    categories_counts = df_sum.drop("id").drop("message").drop("genre")
+    category_names = list(categories_counts.index)
+
+    #draw graphs
     graphs = [
         {
             'data': [
@@ -67,6 +72,24 @@ def index():
                 },
                 'xaxis': {
                     'title': "Genre"
+                }
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=category_names,
+                    y=categories_counts
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of Message Category',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Category"
                 }
             }
         }
