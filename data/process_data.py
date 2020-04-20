@@ -55,7 +55,7 @@ def save_data(df, database_filename):
     database_filename - database file path and name
 
     Description:
-    create 36 individual category column with 0 or 1
+    save the data for database at the specified path.
     '''
     engine = create_engine('sqlite:///data/DisasterResponse.db')
     df.to_sql('data_disaster', engine, index=False)
