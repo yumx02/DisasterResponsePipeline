@@ -30,20 +30,20 @@
 
 
 ### File Structure
-  ┣━ app
-  ┃    ┣━ run.py - Flask application
-  ┃    ┗━ templates
-  ┃        ┣━ go.html - web application of classification result.
-  ┃        ┗━ master.html - web application of master page.
-  ┣━ data
-  ┃    ┣━ disaster_categories.csv - dataset of disaster categories.
-  ┃    ┣━ disaster_messages.csv - dataset of disaster messages.
-  ┃    ┣━ process_data.py - data processing script.
-  ┃    ┗━ DisasterResponse.db - database of cleaned data.
-  ┣━ models
-  ┃    ┣━ train_classifier.py - NLP and ML pipeline script.
-  ┃    ┗━ classifier.pkl - pickle file of classifier
-  ┗━ README.md - this file
+  ┣━ app  
+  ┃    ┣━ run.py - Flask application  
+  ┃    ┗━ templates  
+  ┃        ┣━ go.html - web application of classification result.  
+  ┃        ┗━ master.html - web application of master page.  
+  ┣━ data  
+  ┃    ┣━ disaster_categories.csv - dataset of disaster categories.  
+  ┃    ┣━ disaster_messages.csv - dataset of disaster messages.  
+  ┃    ┣━ process_data.py - data processing script.  
+  ┃    ┗━ DisasterResponse.db - database of cleaned data.  
+  ┣━ models  
+  ┃    ┣━ train_classifier.py - NLP and ML pipeline script.  
+  ┃    ┗━ classifier.pkl - pickle file of classifier  
+  ┗━ README.md - this file  
 
 
 ### Instructions:
